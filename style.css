@@ -1,0 +1,284 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #000000, #2575fc);
+    color: #fff;
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .container {
+    max-width: 1200px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  header h1 {
+    font-size: 2.8rem;
+    color: #fff;
+    margin-bottom: 10px;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  header p {
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  /* Glassmorphism Effect */
+  .glassmorphism {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Input Group Styles */
+  .input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .input-group input,
+  .input-group select,
+  .input-group button {
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transition: all 0.3s ease;
+  }
+  
+  .input-group input::placeholder,
+  .input-group select {
+    color: #e0e0e0;
+  }
+  
+  .input-group input:focus,
+  .input-group select:focus {
+    border-color: #fff;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  }
+  
+  .input-group button {
+    background: #e5a14d;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .input-group button:hover {
+    background: #0056b3;
+  }
+  
+  /* Budget Section */
+  .budget-section h2,
+  .expense-section h2,
+  .currency-converter h2,
+  .expense-list h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #fff;
+    animation: slideIn 1s ease-in-out;
+  }
+  
+  .budget-display {
+    font-size: 1.3rem;
+    color: #fff;
+    margin-top: 10px;
+  }
+  
+  .budget-display span {
+    font-weight: 600;
+    color: #28a745;
+  }
+  
+  /* Expense List Table */
+  .expense-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    animation: fadeIn 2s ease-in-out;
+  }
+  
+  .expense-list th,
+  .expense-list td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+  
+  .expense-list th {
+    background: rgba(0, 123, 255, 0.5);
+    font-weight: 600;
+  }
+  
+  .expense-list tr:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .expense-list .delete-btn {
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .expense-list .delete-btn:hover {
+    background: #c82333;
+  }
+  
+  /* Currency Converter */
+  .currency-converter {
+    margin-top: 40px;
+  }
+  
+  .conversion-result {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-top: 10px;
+  }
+  
+  .conversion-result span {
+    font-weight: 600;
+    color: #28a745;
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    animation: fadeIn 3s ease-in-out;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .input-group {
+      flex-direction: column;
+    }
+  
+    .input-group input,
+    .input-group select,
+    .input-group button {
+      width: 100%;
+    }
+  
+    header h1 {
+      font-size: 2.2rem;
+    }
+  }
+  .clear-budget {
+    display: block;
+    border-radius: 5px;
+    background-color: red;
+    width: 110px;
+    height: 40px;
+    color: white;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.clear-budget:hover {
+    background-color: darkred;
+}
+#total-expense,#te {
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 20px;
+}   
+
+#amount-left,#re{
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 20px;
+}
+.chart-and-table-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between the table and chart */
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.expense-list {
+  flex: 1 1 60%; /* Table takes 60% of the width */
+  min-width: 300px; /* Minimum width for the table */
+}
+
+.chart-section {
+  flex: 1 1 35%; /* Chart takes 35% of the width */
+  min-width: 300px; /* Minimum width for the chart */
+}
+
+#pie-chart canvas {
+  max-width: 100%; /* Ensure the chart fits within its container */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .chart-and-table-container {
+    flex-direction: column;
+  }
+
+  .expense-list,
+  .chart-section {
+    flex: 1 1 100%; /* Full width on smaller screens */
+  }
+}

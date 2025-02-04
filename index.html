@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Budget & Expense Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>💰 Personal Budget & Expense Tracker</h1>
+      <p>Track your expenses, manage your budget, and convert currencies effortlessly.</p>
+    </header>
+
+    <section class="budget-section glassmorphism">
+      <h2>📊 Set Your Budget</h2>
+      <div class="input-group">
+        <input type="number" id="budget" placeholder="Enter your budget">
+        <button id="set-budget">Set Budget</button>
+      </div>
+      <p class="budget-display">Your Budget: <span id="budget-amount">₹0.00</span></p>
+    </section>
+
+    <section class="expense-section glassmorphism">
+      <h2>💸 Add Expense</h2>
+      <div class="input-group">
+        <input type="text" id="expense-name" placeholder="Expense Name">
+        <input type="number" id="expense-amount" placeholder="Amount">
+        <select id="select-category">
+          <option value="Housing">🏠 Housing</option>
+          <option value="Transport">🚗 Transport</option>
+          <option value="Food">🍔 Food</option>
+          <option value="Utilities">💡 Utilities</option>
+          <option value="Entertainment">🎉 Entertainment</option>
+          <option value="Medical">🏥 Medical</option>
+          <option value="Clothing">👕 Clothing</option>
+          <option value="Others">📦 Others</option>
+        </select>
+        <button id="add-expense">Add Expense</button>
+      </div>
+    </section>
+
+    <div class="chart-and-table-container">
+      <section class="expense-list glassmorphism">
+        <h2>📝 Expenses</h2>
+        <table id="expenses-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Amount</th>
+              <th>Category</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Expenses will be dynamically added here -->
+          </tbody>
+        </table>
+      </section>
+    
+      <section class="chart-section glassmorphism">
+        <h2>📊 Expense Distribution</h2>
+        <div id="pie-chart">
+          <canvas></canvas>
+        </div>
+      </section>
+    </div>
+
+    <section class="summary-section glassmorphism">
+      <p id = 'te'>Total Expenses: <span id="total-expense">₹0.00</span></p>
+      <p id = 're'>Remaining budget: <span id="amount-left">₹0.00</span></p>
+      <section id = 'pie-chart'></section>
+    </section>
+
+    <section class="currency-converter glassmorphism">
+      <h2>💱 Currency Converter</h2>
+      <div class="input-group">
+        <input type="number" id="convert-amount" placeholder="Amount">
+        <select id="from-currency">
+          <option value="INR">🇮🇳 INR</option>
+          <option value="USD">🇺🇸 USD</option>
+          <option value="EUR">🇪🇺 EUR</option>
+          <option value="GBP">🇬🇧 GBP</option>
+          <option value="JPY">🇯🇵 JPY</option>
+        </select>
+        <span>➡️</span>
+        <select id="to-currency">
+          <option value="INR">🇮🇳 INR</option>
+          <option value="USD">🇺🇸 USD</option>
+          <option value="EUR">🇪🇺 EUR</option>
+          <option value="GBP">🇬🇧 GBP</option>
+          <option value="JPY">🇯🇵 JPY</option>
+        </select>
+        <button id="convert-currency">Convert</button>
+      </div>
+      <p class="conversion-result">Converted Amount: <span id="converted-amount">0.00</span></p>
+    </section>
+  </div>
+
+  <footer>
+    &copy; Made By Pratyush Mohanty 👨‍💻 | 24BCS10238
+  </footer>
+
+  <script type="module" src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@everapi/currencyapi-js@1.0.0/dist/currencyapi.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
