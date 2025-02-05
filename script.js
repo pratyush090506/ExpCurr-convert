@@ -12,6 +12,8 @@ if (stored_budget) {
     amount_left.innerHTML = '₹' + (parseFloat(stored_budget) - total_expense).toFixed(2);
 }
 
+let editingIndex = null; 
+
 let stored_expenses = JSON.parse(localStorage.getItem('expenses')) || [];
 
 stored_expenses.forEach((expense, index) => {
@@ -20,7 +22,9 @@ stored_expenses.forEach((expense, index) => {
         <td>${expense.name}</td>
         <td>₹${expense.amount.toFixed(2)}</td>
         <td>${expense.category}</td>
-        <td><button class="delete-btn" data-index="${index}">Delete</button></td>
+        <td><button class = 'edit-btn' data-index="${index}">Edit</button>
+            <button class="delete-btn" data-index="${index}">Delete</button> 
+        </td>
     `;
     tbody.appendChild(tr);
 });
@@ -34,7 +38,9 @@ function updateExpenseTable() {
             <td>${expense.name}</td>
             <td>₹${expense.amount.toFixed(2)}</td>
             <td>${expense.category}</td>
-            <td><button class="delete-btn" data-index="${index}">Delete</button></td>
+            <td><button class = 'edit-btn' data-index="${index}">Edit</button>
+                <button class="delete-btn" data-index="${index}">Delete</button>
+            </td>
         `;
         tbody.appendChild(tr);
     });
@@ -42,8 +48,12 @@ function updateExpenseTable() {
     let total_expense = stored_expenses.reduce((acc, cur) => acc + cur.amount, 0);
     let budget = parseFloat(localStorage.getItem('budget'));
     amount_left.innerHTML = '₹' + (budget - total_expense).toFixed(2);
-    localStorage.setItem('TotalExpense',total_expense);
+    localStorage.setItem('TotalExpense', total_expense);
+    localStorage.setItem('RemainingBudget', (budget - total_expense));
     te.innerHTML = '₹' + total_expense.toFixed(2);
+
+    editingIndex = null;
+    drawPieChart();
 }
 
 let te_stored = localStorage.getItem('TotalExpense');
@@ -51,6 +61,10 @@ if(te_stored){
     te.innerHTML = '₹' + te_stored+'.00';
 }
 
+let re_stored = localStorage.getItem('RemainingBudget');
+if(re_stored){
+    amount_left.innerHTML = '₹' + re_stored+'.00';
+}
 
 budget_set.addEventListener('click', (e) => {
     e.preventDefault();
@@ -71,6 +85,7 @@ budget_set.addEventListener('click', (e) => {
             localStorage.removeItem('budget');
             clear_budget.remove();
             budget_input.value = '';
+            editingIndex = null;
         });
         clear_budget.style.display = 'block';
         clear_budget.style.borderRadius = '5px';
@@ -108,12 +123,15 @@ add_exp_btn.addEventListener('click', () => {
         return;
     }
 
-    let expense = { name, amount, category };
-
-    stored_expenses.push(expense);
+    if (editingIndex !== null) {
+        stored_expenses[editingIndex] = { name, amount, category };
+        editingIndex = null;
+    } else {
+        let expense = { name, amount, category };
+        stored_expenses.push(expense);
+    }
 
     localStorage.setItem('expenses', JSON.stringify(stored_expenses));
-
     updateExpenseTable();
 
     expense_name.value = '';
@@ -133,6 +151,22 @@ tbody.addEventListener('click', (event) => {
     }
 });
 
+tbody.addEventListener('click', (event) => {
+    if (event.target.classList.contains('edit-btn')) {
+        let tr = event.target.closest('tr');
+        let index = event.target.getAttribute('data-index');
+
+        if (index !== null) {
+            let expense = stored_expenses[index];
+            if (expense) {
+                expense_name.value = expense.name;
+                expense_amount.value = expense.amount;
+                expense_cat.value = expense.category;
+                editingIndex = index;
+            }
+        }
+    }
+});
 document.querySelector('#convert-currency').addEventListener('click', async () => {
     console.log('Conversion Button Clicked');
     const amount = parseFloat(document.querySelector('#convert-amount').value);
@@ -172,11 +206,9 @@ function drawPieChart() {
     }, {});
 
     let pieChartContainer = document.querySelector('#pie-chart');
-    let canvas = pieChartContainer.querySelector('canvas');
-    if (!canvas) {
-        canvas = document.createElement('canvas');
-        pieChartContainer.appendChild(canvas);
-    }
+    pieChartContainer.innerHTML = ''; 
+    let canvas = document.createElement('canvas');
+    pieChartContainer.appendChild(canvas);
 
     let ctx = canvas.getContext('2d');
     if (typeof Chart !== 'undefined') {
@@ -188,36 +220,36 @@ function drawPieChart() {
                     label: 'Expenses',
                     data: Object.values(categories),
                     backgroundColor: [
-                        'rgba(255, 99, 132, 1)', // Red
-                        'rgba(54, 162, 235, 1)', // Blue
-                        'rgba(255, 206, 86, 1)', // Yellow
-                        'rgba(75, 192, 192, 1)', // Teal
-                        'rgba(153, 102, 255, 1)', // Purple
-                        'rgba(255, 159, 64, 1)'  // Orange
+                        'rgba(255, 99, 132, 1)', 
+                        'rgba(54, 162, 235, 1)', 
+                        'rgba(255, 206, 86, 1)', 
+                        'rgba(75, 192, 192, 1)', 
+                        'rgba(153, 102, 255, 1)', 
+                        'rgba(255, 159, 64, 1)'  
                     ],
                     borderColor: [
-                        'rgba(255, 255, 255, 1)', // White border
+                        'rgba(255, 255, 255, 1)', 
                     ],
                     borderWidth: 1
                 }]
             },
             options: {
-                responsive: true, // Allow chart to resize
-                maintainAspectRatio: false, // Disable aspect ratio to fit container
+                responsive: true, 
+                maintainAspectRatio: false, 
                 plugins: {
                     title: {
                         display: true,
                         text: 'Expenses by Category',
-                        color: 'white', // White title text
+                        color: 'white', 
                         font: {
                             size: 16
                         }
                     },
                     legend: {
                         display: true,
-                        position: 'bottom', // Move legend to the bottom
+                        position: 'bottom', 
                         labels: {
-                            color: 'white', // White legend labels
+                            color: 'white', 
                             font: {
                                 size: 14
                             }
@@ -231,5 +263,4 @@ function drawPieChart() {
     }
 }
 
-// Call the function to draw the pie chart
 drawPieChart();

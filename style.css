@@ -282,3 +282,17 @@
     flex: 1 1 100%; /* Full width on smaller screens */
   }
 }
+
+.edit-btn{
+  width: 60px;
+  height: 35px;
+  border-radius: 5px;
+  background-color: #e5a14d;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+}
