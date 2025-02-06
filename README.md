@@ -89,15 +89,12 @@ Welcome to the **ExpCurr-convert**! This is a simple yet powerful tool to help y
 ## Screenshots
 
 ### Budget Display
-![Budget Display](screenshots/budget-display.png)
+![Budget Display](https://github.com/user-attachments/assets/973e1459-7f15-4105-adca-0737f53ae723)
 
-### Expense Table
-![Expense Table](screenshots/expense-table.png)
-
-### Pie Chart
-![Pie Chart](screenshots/pie-chart.png)
+### Expense Table with Pie Chart Visualisation
+![Expense Table](https://github.com/user-attachments/assets/dca0bdd1-5de4-464f-8ce4-8767de6d40de)
 
 ### Currency Converter
-![Currency Converter](screenshots/currency-converter.png)
+![Currency Converter](https://github.com/user-attachments/assets/990ce021-82e9-4f49-8ad9-124cd860db3f)
 
 Happy budgeting! 💰
