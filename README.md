@@ -95,6 +95,6 @@ Welcome to the **ExpCurr-convert**! This is a simple yet powerful tool to help y
 ![Expense Table](https://github.com/user-attachments/assets/dca0bdd1-5de4-464f-8ce4-8767de6d40de)
 
 ### Currency Converter
-![Currency Converter](https://github.com/user-attachments/assets/990ce021-82e9-4f49-8ad9-124cd860db3f)
+![Currency Converter](https://github.com/user-attachments/assets/b13310f6-7b1f-4c0e-94d1-799ac8c82974)
 
 Happy budgeting! 💰
