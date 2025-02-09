@@ -295,4 +295,41 @@
   margin-left: 10px;
   margin-right: 10px;
   transition: background-color 0.3s ease;
+}.currency-converter {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.currency-rates-table {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.currency-rates-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.currency-rates-table th,
+.currency-rates-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.currency-rates-table th {
+  background-color: #333;
+  color: white;
+}
+
+.currency-rates-table td {
+  background-color: #444;
+  color: white;
 }

@@ -12,20 +12,18 @@ if (stored_budget) {
     amount_left.innerHTML = '₹' + (parseFloat(stored_budget) - total_expense).toFixed(2);
 }
 
-let editingIndex = null;
+let editingIndex = null; 
 
 let stored_expenses = JSON.parse(localStorage.getItem('expenses')) || [];
 
 stored_expenses.forEach((expense, index) => {
     let tr = document.createElement('tr');
-    tr.setAttribute('data-index', index); 
     tr.innerHTML = `
         <td>${expense.name}</td>
         <td>₹${expense.amount.toFixed(2)}</td>
         <td>${expense.category}</td>
-        <td>
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
+        <td><button class = 'edit-btn' data-index="${index}">Edit</button>
+            <button class="delete-btn" data-index="${index}">Delete</button> 
         </td>
     `;
     tbody.appendChild(tr);
@@ -36,14 +34,12 @@ function updateExpenseTable() {
 
     stored_expenses.forEach((expense, index) => {
         let tr = document.createElement('tr');
-        tr.setAttribute('data-index', index); 
         tr.innerHTML = `
             <td>${expense.name}</td>
             <td>₹${expense.amount.toFixed(2)}</td>
             <td>${expense.category}</td>
-            <td>
-                <button class="edit-btn">Edit</button>
-                <button class="delete-btn">Delete</button>
+            <td><button class = 'edit-btn' data-index="${index}">Edit</button>
+                <button class="delete-btn" data-index="${index}">Delete</button>
             </td>
         `;
         tbody.appendChild(tr);
@@ -61,13 +57,13 @@ function updateExpenseTable() {
 }
 
 let te_stored = localStorage.getItem('TotalExpense');
-if (te_stored) {
-    te.innerHTML = '₹' + te_stored + '.00';
+if(te_stored){
+    te.innerHTML = '₹' + te_stored+'.00';
 }
 
 let re_stored = localStorage.getItem('RemainingBudget');
-if (re_stored) {
-    amount_left.innerHTML = '₹' + re_stored + '.00';
+if(re_stored){
+    amount_left.innerHTML = '₹' + re_stored+'.00';
 }
 
 budget_set.addEventListener('click', (e) => {
@@ -158,7 +154,7 @@ tbody.addEventListener('click', (event) => {
 tbody.addEventListener('click', (event) => {
     if (event.target.classList.contains('edit-btn')) {
         let tr = event.target.closest('tr');
-        let index = tr.getAttribute('data-index');
+        let index = event.target.getAttribute('data-index');
 
         if (index !== null) {
             let expense = stored_expenses[index];
@@ -171,7 +167,6 @@ tbody.addEventListener('click', (event) => {
         }
     }
 });
-
 document.querySelector('#convert-currency').addEventListener('click', async () => {
     console.log('Conversion Button Clicked');
     const amount = parseFloat(document.querySelector('#convert-amount').value);
@@ -190,7 +185,7 @@ document.querySelector('#convert-currency').addEventListener('click', async () =
     try {
         const response = await fetch(`https://api.currencyapi.com/v3/latest?apikey=cur_live_cgfzPagod8LD38wOOOTYasCedY2f1533xpQQcfoh&base_currency=${from}&currencies=${to}`);
         const rJSON = await response.json();
-        console.log('API Response:', rJSON);
+        console.log('API Response:', rJSON); 
         const rate = rJSON.data[to].value;
         const convertedAmount = amount * rate;
         document.querySelector('#converted-amount').textContent = convertedAmount.toFixed(2) + ' ' + to;
@@ -201,6 +196,26 @@ document.querySelector('#convert-currency').addEventListener('click', async () =
     }
 });
 
+setInterval(async () => {
+    const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+    const rJSON = await response.json();
+    const rates = rJSON.rates;
+
+    const currencyRatesTable = document.querySelector('#currency-rates');
+    currencyRatesTable.innerHTML = ''; 
+
+    const listedCurrencies = ['INR', 'USD', 'EUR', 'GBP', 'JPY']; 
+    listedCurrencies.forEach((currency) => {
+        if (rates[currency]) {
+            let row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${currency}</td>
+                <td>${rates[currency].toFixed(2)}</td>
+            `;
+            currencyRatesTable.appendChild(row);
+        }
+    });
+}, 2000); 
 function drawPieChart() {
     let categories = stored_expenses.reduce((acc, cur) => {
         if (!acc[cur.category]) {
@@ -211,7 +226,7 @@ function drawPieChart() {
     }, {});
 
     let pieChartContainer = document.querySelector('#pie-chart');
-    pieChartContainer.innerHTML = '';
+    pieChartContainer.innerHTML = ''; 
     let canvas = document.createElement('canvas');
     pieChartContainer.appendChild(canvas);
 
@@ -225,39 +240,36 @@ function drawPieChart() {
                     label: 'Expenses',
                     data: Object.values(categories),
                     backgroundColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgb(0, 255, 47)',
-                        'rgb(255, 0, 238)',
-
+                        'rgba(255, 99, 132, 1)', 
+                        'rgba(54, 162, 235, 1)', 
+                        'rgba(255, 206, 86, 1)', 
+                        'rgba(75, 192, 192, 1)', 
+                        'rgba(153, 102, 255, 1)', 
+                        'rgba(255, 159, 64, 1)'  
                     ],
                     borderColor: [
-                        'rgba(255, 255, 255, 1)',
+                        'rgba(255, 255, 255, 1)', 
                     ],
                     borderWidth: 1
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
+                responsive: true, 
+                maintainAspectRatio: false, 
                 plugins: {
                     title: {
                         display: true,
                         text: 'Expenses by Category',
-                        color: 'white',
+                        color: 'white', 
                         font: {
                             size: 16
                         }
                     },
                     legend: {
                         display: true,
-                        position: 'bottom',
+                        position: 'bottom', 
                         labels: {
-                            color: 'white',
+                            color: 'white', 
                             font: {
                                 size: 14
                             }
